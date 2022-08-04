@@ -1363,6 +1363,13 @@
   "resolved" "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   "version" "2.0.4"
 
+"@ngrx/store@^14.0.2":
+  "integrity" "sha512-ogxcK7fj4zXCxCVJXzX2+jbVCfvC7ehbvbD5oWXT7GFajUIvA8FSXQzapUPAQEqFbjxgFzhjMFBApMaOcfleIQ=="
+  "resolved" "https://registry.npmjs.org/@ngrx/store/-/store-14.0.2.tgz"
+  "version" "14.0.2"
+  dependencies:
+    "tslib" "^2.0.0"
+
 "@ngtools/webpack@14.1.0":
   "integrity" "sha512-d4U6ymDCXckVgfjYEv1Wjzd78ZSm0NKgq8mN6FdlrCupg02LPIODjeKyNr4c4zwMAOJeHkVNEZ+USoDEK3XSsw=="
   "resolved" "https://registry.npmjs.org/@ngtools/webpack/-/webpack-14.1.0.tgz"
@@ -5492,7 +5499,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.5.5", "rxjs@~7.5.0":
+"rxjs@^6.5.3 || ^7.4.0", "rxjs@^6.5.3 || ^7.5.0", "rxjs@^7.5.5", "rxjs@~7.5.0":
   "integrity" "sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.5.6.tgz"
   "version" "7.5.6"
@@ -6171,7 +6178,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-"tslib@^2.1.0", "tslib@^2.3.0", "tslib@2.4.0":
+"tslib@^2.0.0", "tslib@^2.1.0", "tslib@^2.3.0", "tslib@2.4.0":
   "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   "version" "2.4.0"
