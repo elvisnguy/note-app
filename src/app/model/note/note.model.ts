@@ -1,4 +1,5 @@
-export interface NoteModel {
-  title: string;
-  content: string;
+export class NoteModel {
+  public title!: string;
+  public content!: string;
+  public id!: number;
 }

@@ -1,0 +1,22 @@
+<div class="bg-rose-300 max-w-lg mx-auto rounded-md shadow-2xl">
+  <form
+    class="flex flex-col w-full my-3 p-5"
+    #noteForm="ngForm"
+    [formGroup]="noteFormGroup"
+    (ngSubmit)="onSubmit(noteForm)"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput id="title" formControlName="title" [(ngModel)]="note.title"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Content</mat-label>
+      <textarea matInput id="content" formControlName="content" [(ngModel)]="note.content"></textarea>
+    </mat-form-field>
+
+    <div class="flex justify-end">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Add</button>
+    </div>
+  </form>
+</div>

@@ -5,16 +5,24 @@ import { NoteListComponent } from './note-list/note-list.component';
 import { NoteItemComponent } from './note-item/note-item.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoteDetailComponent } from './note-detail/note-detail.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations: [NoteListComponent, NoteItemComponent],
+  declarations: [NoteListComponent, NoteItemComponent, NoteDetailComponent],
   imports: [
     BrowserModule,
     RouterModule,
     MatCardModule,
     MatButtonModule,
     FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
   exports: [NoteListComponent, NoteItemComponent],
   providers: [],
