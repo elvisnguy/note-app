@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { NoteModel } from '../../model/note/note.model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NoteService {
   notes: Array<NoteModel> = [];
+  baseUrl = environment.dataUrl;
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
-  getAllNote() {
-    return this.notes;
+  getNote(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/posts`);
   }
 
-  addNote(note: NoteModel) {
-    const newNote = this.notes.push(note);
-    const index = newNote - 1;
-    return index;
+  getNoteDetail(noteId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/posts/${noteId}`);
   }
 }
