@@ -1,9 +1,15 @@
 <mat-card class="bg-rose-300 mx-auto max-w-lg my-3">
-  <mat-card-title>{{ title }}</mat-card-title>
-  <mat-card-content class="h-20">{{ content }}</mat-card-content>
+  <mat-card-title>{{ note.title }}</mat-card-title>
+  <mat-card-content class="h-20 p-2">{{ note.body }}</mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
+    <a
+      mat-raised-button
+      class="bg-cyan-500"
+      (click)="viewNoteDetail()"
+      [routerLink]="['posts', note.id]"
+    >
+      View detail
+    </a>
+    <button mat-raised-button class="bg-red-600">Delete</button>
   </mat-card-actions>
 </mat-card>
-

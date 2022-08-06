@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NoteModel } from '../../../model/note/note.model';
 import { NoteService } from '../../../service/note/note.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppState } from '../../../store/reducer';
+import { select, Store } from '@ngrx/store';
+import { selectNoteDetailsById } from '../../../store/note/note.selector';
+import { getNoteDetail } from '../../../store/note/note.action';
 
 @Component({
   selector: 'app-note-detail',
@@ -15,25 +14,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./note-detail.component.scss'],
 })
 export class NoteDetailComponent implements OnInit {
-  noteFormGroup!: FormGroup;
-  note!: NoteModel;
+  noteFormGroup: FormGroup;
+  note: NoteModel;
+
   constructor(
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private noteService: NoteService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.note = new NoteModel();
+    this.getNoteDetailById();
+    this.initForm();
+    this.setFormValue();
+  }
 
-    this.noteFormGroup = new FormGroup({
-      title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
+  getNoteDetailById(): void {
+    const noteId = this.route.snapshot.params['id'];
+    this.store.dispatch(getNoteDetail({ noteId }));
+    this.store.pipe(select(selectNoteDetailsById(noteId))).subscribe((note) => {
+      this.note = note as NoteModel;
     });
   }
 
+  initForm(): void {
+    this.noteFormGroup = this.formBuilder.group({
+      title: [''],
+      body: [''],
+    });
+  }
+
+  setFormValue(): void {
+    this.noteFormGroup.get('title')?.setValue(this.note.title);
+    this.noteFormGroup.get('body')?.setValue(this.note.body);
+  }
+
   onSubmit(form: any) {
-    this.noteService.addNote(form.value);
     this.router.navigateByUrl('/');
   }
 }

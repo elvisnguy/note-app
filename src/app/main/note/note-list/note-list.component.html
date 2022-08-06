@@ -1,8 +1,7 @@
 <div class="note-list">
-  <ng-container *ngFor="let note of notes">
+  <ng-container *ngFor="let note of notes$ | async">
     <app-note-item
-      [title]="note.title"
-      [content]="note.content"
+      [note]="note"
       class="w-full"
     ></app-note-item>
   </ng-container>
@@ -12,6 +11,6 @@
   class="add-note-button shadow-2xl fixed left-1/2 transform -translate-x-1/2 bottom-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-96 my-3 rounded-2xl"
 >
   <div class="flex justify-center p-4">
-    <button mat-raised-button color="primary" routerLink="/create-note">Add</button>
+    <button mat-raised-button color="primary">Add</button>
   </div>
 </div>
