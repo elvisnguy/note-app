@@ -23,3 +23,33 @@ export const getNoteDetailFail = createAction(
   '[NOTE] Get Notes Detail Success',
   props<{ error: any }>()
 );
+
+export const createNote = createAction(
+  '[NOTE] Create Note',
+  props<{ note: NoteModel }>()
+);
+
+export const createNoteSuccess = createAction(
+  '[NOTE] Create Note Success',
+  props<{ note: NoteModel }>()
+);
+
+export const createNoteFail = createAction(
+  '[NOTE] Create Note Fail',
+  props<{ error: any }>()
+);
+
+export const deleteNote = createAction(
+  '[NOTE] Delete Note',
+  props<{ noteId: number }>()
+);
+
+export const deleteNoteSuccess = createAction(
+  '[NOTE] Delete Note Success',
+  props<{ noteId: number }>()
+);
+
+export const deleteNoteFail = createAction(
+  '[NOTE] Delete Note Fail',
+  props<{ error: any }>()
+);

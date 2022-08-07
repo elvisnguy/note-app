@@ -20,7 +20,6 @@ export class NoteDetailComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private noteService: NoteService,
-    private router: Router,
     private store: Store<AppState>,
     private route: ActivatedRoute
   ) {}
@@ -49,9 +48,5 @@ export class NoteDetailComponent implements OnInit {
   setFormValue(): void {
     this.noteFormGroup.get('title')?.setValue(this.note.title);
     this.noteFormGroup.get('body')?.setValue(this.note.body);
-  }
-
-  onSubmit(form: any) {
-    this.router.navigateByUrl('/');
   }
 }

@@ -5,7 +5,7 @@ export const selectNotesState =
   createFeatureSelector<fromReducer.NoteState>('notes');
 
 export const selectNotes = createSelector(selectNotesState, (state) => {
-  return state.notes.slice(0, 10);
+  return state.notes;
 });
 
 export const selectNoteDetailsById = (id: number) =>

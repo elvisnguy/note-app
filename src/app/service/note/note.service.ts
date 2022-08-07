@@ -17,4 +17,12 @@ export class NoteService {
   getNoteDetail(noteId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/posts/${noteId}`);
   }
+
+  createNote(note: NoteModel): Observable<NoteModel> {
+    return this.http.post<NoteModel>(`${this.baseUrl}/posts`, note);
+  }
+
+  deleteNote(noteId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/posts/${noteId}`);
+  }
 }

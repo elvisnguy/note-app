@@ -54,5 +54,37 @@ export const notesReducer = createReducer(
 
   on(NoteAction.getNoteDetailFail, (state) => {
     return { ...state };
+  }),
+
+  on(NoteAction.createNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.createNoteSuccess, (state, { note }) => {
+    console.log('check what is note', note);
+    return { ...state };
+  }),
+  on(NoteAction.createNoteFail, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.deleteNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.deleteNoteSuccess, (state, { noteId }) => {
+    console.log(
+      'check all id',
+      state.notes.map((note) => note.id)
+    );
+    console.log(
+      'delete id',
+      state.notes.filter((note) => note.id !== noteId)
+    );
+    const noteDeleted = state.notes.filter((note) => note.id !== noteId);
+    return {
+      ...state,
+      notes: noteDeleted,
+    };
+  }),
+  on(NoteAction.deleteNoteFail, (state) => {
+    return { ...state };
   })
 );
