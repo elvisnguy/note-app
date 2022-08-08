@@ -6,8 +6,7 @@ import { selectNotes } from '../../../store/note/note.selector';
 import { getNote } from '../../../store/note/note.action';
 import { Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
-// @ts-ignore
-import * as _ from 'lodash';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-note-list',
@@ -46,5 +45,9 @@ export class NoteListComponent implements OnInit {
     this.displayNotes = notes.filter((note: NoteModel) => {
       return note.title.toLowerCase().includes(searchText.toLowerCase());
     });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.displayNotes, event.previousIndex, event.currentIndex);
   }
 }
