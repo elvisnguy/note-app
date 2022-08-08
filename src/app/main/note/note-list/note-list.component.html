@@ -5,11 +5,13 @@
     </mat-form-field>
   </div>
 
-  <div class="note-list overflow-auto">
+  <div class="note-list overflow-auto" cdkDropList (cdkDropListDropped)="drop($event)">
     <app-note-item
       *ngFor="let note of displayNotes"
       [note]="note"
       class="w-full"
+      cdkDrag
+      cdkDragHandle
     ></app-note-item>
   </div>
 

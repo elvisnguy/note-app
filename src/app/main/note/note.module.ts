@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoteCreateComponent } from './note-create/note-create.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NoteCreateComponent } from './note-create/note-create.component';
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
+    DragDropModule,
   ],
   exports: [NoteListComponent, NoteItemComponent],
   providers: [],
