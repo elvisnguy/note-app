@@ -1,16 +1,25 @@
-<div class="note-list">
-  <ng-container *ngFor="let note of notes$ | async">
+<div class="flex flex-col">
+  <div class="flex bg-violet-400 search-filter-note">
+    <mat-form-field class="m-auto search-form" appearance="outline">
+      <input matInput placeholder="Search" [(ngModel)]="searchText" (input)="noteFilterChanged(notes,searchText)" />
+    </mat-form-field>
+  </div>
+
+  <div class="note-list overflow-auto">
     <app-note-item
+      *ngFor="let note of notes$ | async"
       [note]="note"
       class="w-full"
     ></app-note-item>
-  </ng-container>
-</div>
+  </div>
 
-<div
-  class="add-note-button shadow-2xl fixed left-1/2 transform -translate-x-1/2 bottom-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-96 my-3 rounded-2xl"
->
-  <div class="flex justify-center p-4">
-    <button mat-raised-button color="primary">Add</button>
+  <div
+    class="add-note-button flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+  >
+    <div class="m-auto">
+      <button mat-raised-button color="primary" routerLink="create-note">
+        Add
+      </button>
+    </div>
   </div>
 </div>

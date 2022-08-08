@@ -54,5 +54,65 @@ export const notesReducer = createReducer(
 
   on(NoteAction.getNoteDetailFail, (state) => {
     return { ...state };
+  }),
+
+  on(NoteAction.createNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.createNoteSuccess, (state, { note }) => {
+    const newNoteCreated = _.cloneDeep(state.notes);
+    const noteIndex = newNoteCreated.findIndex(
+      (aNote: { id: number }) => aNote.id === note.id
+    );
+
+    if (noteIndex > -1) {
+      newNoteCreated[noteIndex] = note;
+    } else {
+      newNoteCreated.push(note);
+    }
+
+    return {
+      ...state,
+      notes: newNoteCreated,
+    };
+  }),
+  on(NoteAction.createNoteFail, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.deleteNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.deleteNoteSuccess, (state, { noteId }) => {
+    const noteDeleted = state.notes.filter((note) => note.id !== noteId);
+    return {
+      ...state,
+      notes: noteDeleted,
+    };
+  }),
+  on(NoteAction.deleteNoteFail, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.updateNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.updateNoteSuccess, (state, { note }) => {
+    const noteUpdated = _.cloneDeep(state.notes);
+    const noteIndex = noteUpdated.findIndex(
+      (aNote: { id: number }) => aNote.id === note.id
+    );
+
+    if (noteIndex > -1) {
+      noteUpdated[noteIndex] = note;
+    } else {
+      noteUpdated.push(note);
+    }
+
+    return {
+      ...state,
+      notes: noteUpdated,
+    };
+  }),
+  on(NoteAction.updateNoteFail, (state) => {
+    return { ...state };
   })
 );

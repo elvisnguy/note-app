@@ -3,7 +3,7 @@
     class="flex flex-col w-full my-3 p-5"
     #noteForm="ngForm"
     [formGroup]="noteFormGroup"
-    (ngSubmit)="updateNote(noteForm)"
+    (ngSubmit)="onSubmit(noteForm)"
   >
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
@@ -16,7 +16,7 @@
     </mat-form-field>
 
     <div class="flex justify-end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Update</button>
+      <button mat-raised-button color="primary" type="submit"  [disabled]="!noteForm.valid" >Add</button>
     </div>
   </form>
 </div>

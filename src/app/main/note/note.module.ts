@@ -10,9 +10,15 @@ import { NoteDetailComponent } from './note-detail/note-detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { NoteCreateComponent } from './note-create/note-create.component';
 
 @NgModule({
-  declarations: [NoteListComponent, NoteItemComponent, NoteDetailComponent],
+  declarations: [
+    NoteListComponent,
+    NoteItemComponent,
+    NoteDetailComponent,
+    NoteCreateComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule,

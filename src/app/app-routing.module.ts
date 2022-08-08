@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { NoteListComponent } from './main/note/note-list/note-list.component';
 import { NoteDetailComponent } from './main/note/note-detail/note-detail.component';
+import { NoteCreateComponent } from './main/note/note-create/note-create.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'posts/:id',
         component: NoteDetailComponent,
+      },
+      {
+        path: 'create-note',
+        component: NoteCreateComponent,
       },
     ],
   },
