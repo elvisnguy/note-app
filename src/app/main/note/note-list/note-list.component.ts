@@ -19,6 +19,7 @@ export class NoteListComponent implements OnInit {
   notes: Array<NoteModel>;
   note: NoteModel;
   searchText: string;
+  displayNotes: Array<NoteModel> = [];
 
   constructor(
     private noteService: NoteService,
@@ -32,17 +33,18 @@ export class NoteListComponent implements OnInit {
   getNote(): void {
     this.store.dispatch(getNote());
     this.notes$ = this.store.pipe(select(selectNotes));
-    this.notes$.pipe().subscribe((notes) => (this.notes = notes));
+    this.notes$.pipe().subscribe((notes) => {
+      this.notes = notes;
+      this.displayNotes = notes;
+    });
   }
 
   noteFilterChanged(notes: Array<NoteModel>, searchText: string): any {
-    this.notes = notes;
     if (!notes) return [];
     if (!searchText) return notes;
-    searchText = searchText.toLowerCase();
-    return notes.filter((note: NoteModel) => {
-      debugger;
-      return note.title.toLowerCase().includes(searchText);
+
+    this.displayNotes = notes.filter((note: NoteModel) => {
+      return note.title.toLowerCase().includes(searchText.toLowerCase());
     });
   }
 }
