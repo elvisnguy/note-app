@@ -7,7 +7,7 @@
 
   <div class="note-list overflow-auto">
     <app-note-item
-      *ngFor="let note of notes$ | async"
+      *ngFor="let note of displayNotes"
       [note]="note"
       class="w-full"
     ></app-note-item>
