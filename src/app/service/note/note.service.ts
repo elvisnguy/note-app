@@ -6,7 +6,6 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NoteService {
-  notes: Array<NoteModel> = [];
   baseUrl = environment.dataUrl;
   constructor(private http: HttpClient) {}
 
@@ -24,5 +23,9 @@ export class NoteService {
 
   deleteNote(noteId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/posts/${noteId}`);
+  }
+
+  updateNote(note: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/posts/${note.id}`, note);
   }
 }

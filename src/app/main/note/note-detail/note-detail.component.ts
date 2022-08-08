@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NoteModel } from '../../../model/note/note.model';
 import { NoteService } from '../../../service/note/note.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { AppState } from '../../../store/reducer';
 import { select, Store } from '@ngrx/store';
 import { selectNoteDetailsById } from '../../../store/note/note.selector';
 import { getNoteDetail } from '../../../store/note/note.action';
+import { updateNote } from '../../../store/note/note.action';
 
 @Component({
   selector: 'app-note-detail',
@@ -21,7 +22,8 @@ export class NoteDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private noteService: NoteService,
     private store: Store<AppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,13 +42,19 @@ export class NoteDetailComponent implements OnInit {
 
   initForm(): void {
     this.noteFormGroup = this.formBuilder.group({
-      title: [''],
-      body: [''],
+      title: ['', Validators.required],
+      body: ['', Validators.required],
+      id: [''],
     });
   }
 
   setFormValue(): void {
     this.noteFormGroup.get('title')?.setValue(this.note.title);
     this.noteFormGroup.get('body')?.setValue(this.note.body);
+    this.noteFormGroup.get('id')?.setValue(this.note.id);
+  }
+
+  updateNote(form: any): any {
+    this.store.dispatch(updateNote({ note: form.value }));
   }
 }

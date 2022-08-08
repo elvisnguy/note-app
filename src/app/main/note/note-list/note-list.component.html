@@ -1,5 +1,11 @@
-<div class="h-full">
-  <div class="note-list note-img overflow-auto">
+<div class="flex flex-col">
+  <div class="flex bg-violet-400 search-filter-note">
+    <mat-form-field class="m-auto search-form" appearance="outline">
+      <input matInput placeholder="Search" [(ngModel)]="searchText" (input)="noteFilterChanged(notes,searchText)" />
+    </mat-form-field>
+  </div>
+
+  <div class="note-list overflow-auto">
     <app-note-item
       *ngFor="let note of notes$ | async"
       [note]="note"

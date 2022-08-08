@@ -33,6 +33,6 @@ export class NoteCreateComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    this.store.dispatch(createNote({ note: this.note }));
+    this.store.dispatch(createNote({ note: form.value }));
   }
 }

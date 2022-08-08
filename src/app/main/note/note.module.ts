@@ -13,7 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { NoteCreateComponent } from './note-create/note-create.component';
 
 @NgModule({
-  declarations: [NoteListComponent, NoteItemComponent, NoteDetailComponent, NoteCreateComponent],
+  declarations: [
+    NoteListComponent,
+    NoteItemComponent,
+    NoteDetailComponent,
+    NoteCreateComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule,

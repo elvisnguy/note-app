@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { NoteService } from '../../service/note/note.service';
 import * as NoteAction from './note.action';
 import { catchError, concatMap, exhaustMap, map, mergeMap, of } from 'rxjs';
+import { Route, Router } from '@angular/router';
 
 @Injectable()
 export class NoteEffect {
@@ -44,6 +45,7 @@ export class NoteEffect {
       exhaustMap((action) =>
         this.noteService.createNote(action.note).pipe(
           map((res) => {
+            this.router.navigate(['/']);
             return NoteAction.createNoteSuccess({ note: res });
           }),
           catchError((error) => {
@@ -74,5 +76,24 @@ export class NoteEffect {
     )
   );
 
-  constructor(private actions$: Actions, private noteService: NoteService) {}
+  updateNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteAction.updateNote),
+      exhaustMap((action) =>
+        this.noteService.updateNote(action.note).pipe(
+          map((res) => {
+            this.router.navigate(['/']);
+            return NoteAction.updateNoteSuccess({ note: res });
+          }),
+          catchError((error) => of(NoteAction.updateNoteFail({ error })))
+        )
+      )
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private noteService: NoteService,
+    private router: Router
+  ) {}
 }

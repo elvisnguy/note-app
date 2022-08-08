@@ -60,8 +60,21 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.createNoteSuccess, (state, { note }) => {
-    console.log('check what is note', note);
-    return { ...state };
+    const newNoteCreated = _.cloneDeep(state.notes);
+    const noteIndex = newNoteCreated.findIndex(
+      (aNote: { id: number }) => aNote.id === note.id
+    );
+
+    if (noteIndex > -1) {
+      newNoteCreated[noteIndex] = note;
+    } else {
+      newNoteCreated.push(note);
+    }
+
+    return {
+      ...state,
+      notes: newNoteCreated,
+    };
   }),
   on(NoteAction.createNoteFail, (state) => {
     return { ...state };
@@ -70,14 +83,6 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.deleteNoteSuccess, (state, { noteId }) => {
-    console.log(
-      'check all id',
-      state.notes.map((note) => note.id)
-    );
-    console.log(
-      'delete id',
-      state.notes.filter((note) => note.id !== noteId)
-    );
     const noteDeleted = state.notes.filter((note) => note.id !== noteId);
     return {
       ...state,
@@ -85,6 +90,29 @@ export const notesReducer = createReducer(
     };
   }),
   on(NoteAction.deleteNoteFail, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.updateNote, (state) => {
+    return { ...state };
+  }),
+  on(NoteAction.updateNoteSuccess, (state, { note }) => {
+    const noteUpdated = _.cloneDeep(state.notes);
+    const noteIndex = noteUpdated.findIndex(
+      (aNote: { id: number }) => aNote.id === note.id
+    );
+
+    if (noteIndex > -1) {
+      noteUpdated[noteIndex] = note;
+    } else {
+      noteUpdated.push(note);
+    }
+
+    return {
+      ...state,
+      notes: noteUpdated,
+    };
+  }),
+  on(NoteAction.updateNoteFail, (state) => {
     return { ...state };
   })
 );

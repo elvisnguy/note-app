@@ -53,3 +53,17 @@ export const deleteNoteFail = createAction(
   '[NOTE] Delete Note Fail',
   props<{ error: any }>()
 );
+
+export const updateNote = createAction(
+  '[NOTE] Update Note',
+  props<{ note: any }>()
+);
+
+export const updateNoteSuccess = createAction(
+  '[NOTE] Update Note Success',
+  props<{ note: NoteModel }>()
+);
+export const updateNoteFail = createAction(
+  '[NOTE] Update Note Fail',
+  props<{ error: any }>()
+);
