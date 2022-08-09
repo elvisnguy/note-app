@@ -62,8 +62,6 @@ export class NoteCreateComponent implements OnInit {
       this.labels = [...new Set(this.labels.concat(value))];
     }
 
-    console.log(this.labels);
-
     if (input) {
       input.value = '';
     }

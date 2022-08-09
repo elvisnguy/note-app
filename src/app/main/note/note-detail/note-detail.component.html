@@ -19,7 +19,7 @@
         <mat-label>Label</mat-label>
         <mat-chip-list class="label-chip-list" #chipList>
           <mat-chip
-            *ngFor="let label of note.labels"
+            *ngFor="let label of note?.labels"
             [selectable]="true"
             [removable]="true"
             class="label-chip"

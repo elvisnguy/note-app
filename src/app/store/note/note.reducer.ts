@@ -3,14 +3,28 @@ import * as NoteAction from './note.action';
 import { NoteModel } from '../../model/note/note.model';
 // @ts-ignore
 import * as _ from 'lodash';
+import {
+  createEntityAdapter,
+  EntityState,
+  EntityAdapter,
+  Update,
+} from '@ngrx/entity';
 
-export interface NoteState {
-  notes: Array<NoteModel>;
+export interface NoteState extends EntityState<NoteModel> {
+  pending: boolean;
 }
 
-export const initialState: NoteState = {
-  notes: [],
-};
+export const noteAdapter: EntityAdapter<NoteModel> =
+  createEntityAdapter<NoteModel>({
+    sortComparer: (a, b) => {
+      return Number(b.id) - Number(a.id);
+    },
+    selectId: (note: NoteModel) => note.id,
+  });
+
+export const initialState: NoteState = noteAdapter.getInitialState({
+  pending: false,
+});
 
 export const notesReducer = createReducer(
   initialState,
@@ -19,11 +33,8 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
 
-  on(NoteAction.getNoteSuccess, (state, action) => {
-    return {
-      ...state,
-      notes: action.notes,
-    };
+  on(NoteAction.getNoteSuccess, (state, { notes }) => {
+    return noteAdapter.setAll(notes, { ...state, pending: false });
   }),
 
   on(NoteAction.getNoteFail, (state) => {
@@ -35,21 +46,7 @@ export const notesReducer = createReducer(
   }),
 
   on(NoteAction.getNoteDetailSuccess, (state, { note }) => {
-    const newNotes = _.cloneDeep(state.notes);
-    const noteIndex = newNotes.findIndex(
-      (aNote: { id: number }) => aNote.id === note.id
-    );
-
-    if (noteIndex > -1) {
-      newNotes[noteIndex] = note;
-    } else {
-      newNotes.push(note);
-    }
-
-    return {
-      ...state,
-      notes: newNotes,
-    };
+    return noteAdapter.upsertOne(note, { ...state });
   }),
 
   on(NoteAction.getNoteDetailFail, (state) => {
@@ -60,21 +57,7 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.createNoteSuccess, (state, { note }) => {
-    const newNoteCreated = _.cloneDeep(state.notes);
-    const noteIndex = newNoteCreated.findIndex(
-      (aNote: { id: number }) => aNote.id === note.id
-    );
-
-    if (noteIndex > -1) {
-      newNoteCreated[noteIndex] = note;
-    } else {
-      newNoteCreated.push(note);
-    }
-
-    return {
-      ...state,
-      notes: newNoteCreated,
-    };
+    return noteAdapter.addOne(note, { ...state, pending: false });
   }),
   on(NoteAction.createNoteFail, (state) => {
     return { ...state };
@@ -83,11 +66,7 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.deleteNoteSuccess, (state, { noteId }) => {
-    const noteDeleted = state.notes.filter((note) => note.id !== noteId);
-    return {
-      ...state,
-      notes: noteDeleted,
-    };
+    return noteAdapter.removeOne(noteId, { ...state });
   }),
   on(NoteAction.deleteNoteFail, (state) => {
     return { ...state };
@@ -96,21 +75,12 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.updateNoteSuccess, (state, { note }) => {
-    const noteUpdated = _.cloneDeep(state.notes);
-    const noteIndex = noteUpdated.findIndex(
-      (aNote: { id: number }) => aNote.id === note.id
-    );
-
-    if (noteIndex > -1) {
-      noteUpdated[noteIndex] = note;
-    } else {
-      noteUpdated.push(note);
-    }
-
-    return {
-      ...state,
-      notes: noteUpdated,
+    const notes: Update<NoteModel> = {
+      id: note.id,
+      changes: note,
     };
+
+    return noteAdapter.updateOne(notes, { ...state });
   }),
   on(NoteAction.updateNoteFail, (state) => {
     return { ...state };
