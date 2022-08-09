@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dataUrl: 'https://jsonplaceholder.typicode.com',
+  dataUrl: 'http://localhost:3000',
 };
 
 /*

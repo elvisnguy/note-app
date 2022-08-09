@@ -1,15 +1,20 @@
 <mat-card class="bg-violet-400 bg-opacity-50 mx-auto max-w-lg my-3">
   <mat-card-title>{{ note.title }}</mat-card-title>
-  <mat-card-content class="h-20 p-2">{{ note.body }}</mat-card-content>
+  <mat-card-content class="h-20 p-2">{{ note.body }} </mat-card-content>
+
+  <mat-chip-list>
+    <mat-chip *ngFor="let label of note.labels">{{ label }}</mat-chip>
+  </mat-chip-list>
   <mat-card-actions align="end">
     <a
       mat-raised-button
       class="bg-cyan-500"
       (click)="viewNoteDetail()"
-      [routerLink]="['posts', note.id]"
+      [routerLink]="['notes', note.id]"
     >
       View detail
     </a>
+
     <button mat-raised-button class="bg-red-600" (click)="deleteNote()">
       Delete
     </button>

@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoteCreateComponent } from './note-create/note-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     MatInputModule,
     DragDropModule,
+    MatChipsModule,
   ],
   exports: [NoteListComponent, NoteItemComponent],
   providers: [],

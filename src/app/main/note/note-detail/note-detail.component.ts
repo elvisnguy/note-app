@@ -22,8 +22,7 @@ export class NoteDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private noteService: NoteService,
     private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +54,8 @@ export class NoteDetailComponent implements OnInit {
   }
 
   updateNote(form: any): any {
-    this.store.dispatch(updateNote({ note: form.value }));
+    this.store.dispatch(
+      updateNote({ note: { ...form.value, labels: this.note.labels } })
+    );
   }
 }
