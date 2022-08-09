@@ -10,22 +10,22 @@ export class NoteService {
   constructor(private http: HttpClient) {}
 
   getNote(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/posts`);
+    return this.http.get<any>(`${this.baseUrl}/notes`);
   }
 
   getNoteDetail(noteId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/posts/${noteId}`);
+    return this.http.get<any>(`${this.baseUrl}/notes/${noteId}`);
   }
 
   createNote(note: NoteModel): Observable<NoteModel> {
-    return this.http.post<NoteModel>(`${this.baseUrl}/posts`, note);
+    return this.http.post<NoteModel>(`${this.baseUrl}/notes`, note);
   }
 
   deleteNote(noteId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/posts/${noteId}`);
+    return this.http.delete(`${this.baseUrl}/notes/${noteId}`);
   }
 
   updateNote(note: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/posts/${note.id}`, note);
+    return this.http.put(`${this.baseUrl}/notes/${note.id}`, note);
   }
 }
