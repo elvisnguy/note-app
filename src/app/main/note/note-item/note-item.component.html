@@ -3,7 +3,7 @@
   <mat-card-content class="h-20 p-2">{{ note.body }} </mat-card-content>
 
   <mat-chip-list>
-    <mat-chip *ngFor="let label of note.labels">{{ label }}</mat-chip>
+    <mat-chip *ngFor="let label of note?.labels">{{ label }}</mat-chip>
   </mat-chip-list>
   <mat-card-actions align="end">
     <a

@@ -1,17 +1,22 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromReducer from './note.reducer';
 import { cloneDeep } from 'lodash';
+import { NoteModel } from '../../model/note/note.model';
+import { noteAdapter } from './note.reducer';
 
 export const selectNotesState =
   createFeatureSelector<fromReducer.NoteState>('notes');
 
-export const selectNotes = createSelector(selectNotesState, (state) => {
-  return cloneDeep(state.notes)
-    .sort((a, b) => Number(b.id) - Number(a.id))
-    .slice(0, 10);
+const {
+  selectIds,
+  selectEntities: selectNoteEntities,
+  selectAll: selectAllNotes,
+  selectTotal,
+} = noteAdapter.getSelectors(selectNotesState);
+
+export const selectNotes = createSelector(selectAllNotes, (notes) => {
+  return notes.slice(0, 10);
 });
 
-export const selectNoteDetailsById = (id: number) =>
-  createSelector(selectNotesState, (state) => {
-    return state.notes.find((note) => note.id === Number(id));
-  });
+export const selectNoteDetailsById = (noteId: number) =>
+  createSelector(selectNoteEntities, (noteEntities) => noteEntities[noteId]);
