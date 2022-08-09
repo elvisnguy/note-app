@@ -19,14 +19,26 @@
         <mat-label>Label</mat-label>
         <mat-chip-list class="label-chip-list" #chipList>
           <mat-chip
-            *ngFor="let label of note?.labels"
+            *ngFor="let label of labels"
             [selectable]="true"
             [removable]="true"
+            (removed)="removeLabel(label)"
             class="label-chip"
           >
             <span>{{ label }}</span>
             <mat-icon matChipRemove>close</mat-icon>
           </mat-chip>
+          <input
+            matInput
+            placeholder="Edit labels"
+            data-cy="labels"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="add($event, labelInput)"
+            (paste)="paste($event)"
+            #labelInput
+          />
         </mat-chip-list>
     </mat-form-field>
 
