@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NoteModel } from '../../../model/note/note.model';
 import { AppState } from '../../../store/reducer';
 import { Store } from '@ngrx/store';
-import { getNoteDetail } from '../../../store/note/note.action';
-import { deleteNote } from '../../../store/note/note.action';
+import { deleteNote, getNoteDetail } from '../../../store/note/note.action';
 
 @Component({
   selector: 'app-note-item',

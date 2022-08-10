@@ -1,21 +1,22 @@
-<div class="bg-rose-300 max-w-lg mx-auto rounded-md shadow-2xl">
-  <form
-    class="flex flex-col w-full my-3 p-5"
-    #noteForm="ngForm"
-    [formGroup]="noteFormGroup"
-    (ngSubmit)="updateNote(noteForm)"
-  >
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title" />
-    </mat-form-field>
+<div class="h-screen flex justify-center items-center px-4 lg:!px-0">
+  <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl">
+    <form
+      class="flex flex-col w-full my-3 p-5"
+      #noteForm="ngForm"
+      [formGroup]="noteFormGroup"
+      (ngSubmit)="updateNote(noteForm)"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Body</mat-label>
-      <textarea matInput formControlName="body" class="h-20" ></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Body</mat-label>
+        <textarea matInput formControlName="body" class="h-20" ></textarea>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Label</mat-label>
         <mat-chip-list class="label-chip-list" #chipList>
           <mat-chip
@@ -40,10 +41,11 @@
             #labelInput
           />
         </mat-chip-list>
-    </mat-form-field>
+      </mat-form-field>
 
-    <div class="flex justify-end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Update</button>
-    </div>
-  </form>
+      <div class="flex justify-end">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Update</button>
+      </div>
+    </form>
+  </div>
 </div>

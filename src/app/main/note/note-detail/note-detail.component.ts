@@ -33,12 +33,12 @@ export class NoteDetailComponent implements OnInit {
     private noteService: NoteService,
     private store: Store<AppState>,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.initForm();
+  }
 
   ngOnInit(): void {
     this.getNoteDetailById();
-    this.initForm();
-    this.setFormValue();
   }
 
   getNoteDetailById(): void {
@@ -46,6 +46,9 @@ export class NoteDetailComponent implements OnInit {
     this.store.dispatch(getNoteDetail({ noteId }));
     this.store.pipe(select(selectNoteDetailsById(noteId))).subscribe((note) => {
       this.note = note as NoteModel;
+      if (this.note) {
+        this.setFormValue();
+      }
     });
   }
 
