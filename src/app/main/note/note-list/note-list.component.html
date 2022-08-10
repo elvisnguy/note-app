@@ -1,11 +1,20 @@
 <div class="flex flex-col">
-  <div class="flex bg-violet-400 search-filter-note">
-    <mat-form-field class="m-auto search-form" appearance="outline">
-      <input matInput placeholder="Search" [(ngModel)]="searchText" (input)="noteFilterChanged(notes,searchText)" />
+  <mat-toolbar class="sticky top-0 z-10">
+    <span>Note App</span>
+    <mat-form-field class="mx-auto search-form" appearance="standard">
+      <input
+        matInput
+        placeholder="Search"
+        [(ngModel)]="searchText"
+        (input)="noteFilterChanged(notes, searchText)"
+      />
     </mat-form-field>
-  </div>
-
-  <div class="note-list overflow-auto" cdkDropList (cdkDropListDropped)="drop($event)">
+  </mat-toolbar>
+  <div
+    class="note-list pb-16 px-4 lg:!px-0 min-h-screen"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+  >
     <app-note-item
       *ngFor="let note of displayNotes"
       [note]="note"
@@ -15,13 +24,24 @@
     ></app-note-item>
   </div>
 
-  <div
-    class="add-note-button flex bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+  <mat-toolbar
+    class="toolbar-bottom flex bottom-0 fixed justify-around h-auto py-5"
   >
-    <div class="m-auto">
-      <button mat-raised-button color="primary" routerLink="create-note">
-        Add
-      </button>
-    </div>
-  </div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="!hidden lg:!block w-60 add-note-button bg-gradient-to-r from-purple-500 to-pink-500"
+      routerLink="create-note"
+    >
+      <span class="text-xl text-purple-600">ADD</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="lg:!hidden add-note-button bg-gradient-to-r from-purple-500 to-pink-500"
+      routerLink="create-note"
+    >
+      <span class="text-xl text-purple-600">+</span>
+    </button>
+  </mat-toolbar>
 </div>

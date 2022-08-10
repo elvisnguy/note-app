@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NoteCreateComponent } from './note-create/note-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     DragDropModule,
     MatChipsModule,
+    MatToolbarModule,
   ],
   exports: [NoteListComponent, NoteItemComponent],
   providers: [],

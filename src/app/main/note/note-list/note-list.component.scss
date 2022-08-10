@@ -1,7 +1,10 @@
-.note-list {
-  height: 545px;
-  background-image:  url("../../../../assets/images/note-img/note-bg.png");
-  background-size: cover;
-  background-position: center;
-  width: 100%;
+.toolbar-bottom {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.add-note-button {
+  border-radius: 20px;
+  border: 1px solid rebeccapurple;
+  box-shadow: 0px 0px 24px rgb(243 41 170 / 48%);
 }
