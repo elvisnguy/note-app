@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NoteModel } from '../../../model/note/note.model';
 import { AppState } from '../../../store/reducer';
 import { Store } from '@ngrx/store';
-import { deleteNote } from '../../../store/note/note.action';
+import { deleteNote, getNoteDetail } from '../../../store/note/note.action';
 
 @Component({
   selector: 'app-note-item',
@@ -16,7 +16,7 @@ export class NoteItemComponent implements OnInit {
   ngOnInit(): void {}
 
   viewNoteDetail(): void {
-    // this.store.dispatch(getNoteDetail({ noteId: this.note.id }));
+    this.store.dispatch(getNoteDetail({ noteId: this.note.id }));
   }
 
   deleteNote(): void {

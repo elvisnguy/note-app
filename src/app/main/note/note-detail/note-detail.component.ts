@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -67,7 +67,6 @@ export class NoteDetailComponent implements OnInit {
 
   setFormValue(): void {
     this.noteFormGroup.patchValue(this.note);
-    console.log('set value', this.note);
     this.labels = _.cloneDeep(this.note?.labels);
   }
 
