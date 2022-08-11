@@ -7,17 +7,17 @@
       (ngSubmit)="updateNote(noteForm)"
     >
       <mat-form-field appearance="fill">
-        <mat-label>Title</mat-label>
+        <mat-label>{{'ROOT.TITLE' | translate}}</mat-label>
         <input matInput formControlName="title" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Body</mat-label>
+        <mat-label>{{'ROOT.BODY' | translate}}</mat-label>
         <textarea matInput formControlName="body" class="h-20" ></textarea>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Label</mat-label>
+        <mat-label>{{'ROOT.LABEL' | translate}}</mat-label>
         <mat-chip-list class="label-chip-list" #chipList>
           <mat-chip
             *ngFor="let label of labels"
@@ -31,7 +31,7 @@
           </mat-chip>
           <input
             matInput
-            placeholder="Edit labels"
+            placeholder="{{'ROOT.EDIT_LABELS' | translate}}"
             data-cy="labels"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -44,7 +44,7 @@
       </mat-form-field>
 
       <div class="flex justify-end">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">Update</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">{{'ROOT.UPDATE' | translate}}</button>
       </div>
     </form>
   </div>

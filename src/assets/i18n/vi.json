@@ -1,0 +1,16 @@
+{
+  "ROOT":{
+    "NOTE_APP": "Ghi chú",
+    "SEARCH": "Tìm kiếm",
+    "LANGUAGE": "Ngôn ngữ",
+    "TITLE": "Tiêu đề",
+    "BODY": "Nội dung",
+    "LABEL": "Nhãn",
+    "PLEASE_ENTER_LABELS": "Hãy nhập các nhãn",
+    "EDIT_LABELS": "Chỉnh sửa các nhãn",
+    "ADD":"Thêm",
+    "DELETE":"Xóa",
+    "UPDATE":"Cập nhật",
+    "DETAIL":"Chi tiết"
+  }
+}

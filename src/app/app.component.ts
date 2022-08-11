@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'note-app';
+  constructor(public translate: TranslateService) {
+    translate.addLangs(['vi', 'en']);
+    translate.setDefaultLang('vi');
+  }
 }
