@@ -7,6 +7,7 @@ import { getNote } from '../../../store/note/note.action';
 import { Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-note-list',
@@ -22,7 +23,8 @@ export class NoteListComponent implements OnInit {
 
   constructor(
     private noteService: NoteService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -49,5 +51,8 @@ export class NoteListComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.displayNotes, event.previousIndex, event.currentIndex);
+  }
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
   }
 }

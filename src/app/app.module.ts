@@ -9,9 +9,11 @@ import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { ROOT_REDUCERS } from './store/reducer';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { NoteEffect } from './store/note/note.effect';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function (state, action) {
@@ -22,6 +24,9 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 export const metaReducers: MetaReducer<any>[] = [debug];
+export function httpTranslateLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +37,13 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     NoteModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     StoreModule.forRoot(ROOT_REDUCERS, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

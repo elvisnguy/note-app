@@ -13,7 +13,11 @@ import { MatInputModule } from '@angular/material/input';
 import { NoteCreateComponent } from './note-create/note-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     DragDropModule,
     MatChipsModule,
     MatToolbarModule,
+    TranslateModule,
+    MatListModule,
+    MatSelectModule,
+    MatButtonToggleModule,
   ],
   exports: [NoteListComponent, NoteItemComponent],
   providers: [],

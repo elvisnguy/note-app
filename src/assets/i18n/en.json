@@ -1,0 +1,16 @@
+{
+  "ROOT": {
+    "NOTE_APP": "Note App",
+    "SEARCH": "Search",
+    "LANGUAGE": "Language",
+    "TITLE": "Title",
+    "BODY": "Body",
+    "LABEL": "Label",
+    "PLEASE_ENTER_LABELS": "Please enter labels",
+    "EDIT_LABELS": "Edit Labels",
+    "ADD": "Add",
+    "DELETE": "Delete",
+    "UPDATE": "Update",
+    "DETAIL": "Detail"
+  }
+}

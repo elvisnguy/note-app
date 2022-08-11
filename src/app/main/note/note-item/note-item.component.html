@@ -12,7 +12,7 @@
       (click)="viewNoteDetail()"
       [routerLink]="['notes', note.id]"
     >
-      <span class="text-sm text-emerald-500">Detail</span>
+      <span class="text-sm text-emerald-500">{{'ROOT.DETAIL' | translate}}</span>
     </a>
 
     <button
@@ -20,7 +20,7 @@
       class="note-delete-button bg-red-300"
       (click)="deleteNote()"
     >
-      <span class="text-sm text-red-500">Delete</span>
+      <span class="text-sm text-red-500">{{'ROOT.DELETE' | translate}}</span>
     </button>
   </mat-card-actions>
 </mat-card>

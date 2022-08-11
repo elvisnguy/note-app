@@ -1,14 +1,39 @@
 <div class="flex flex-col">
   <mat-toolbar class="sticky top-0 z-10">
-    <span>Note App</span>
+    <span>{{ "ROOT.NOTE_APP" | translate }}</span>
     <mat-form-field class="mx-auto search-form" appearance="standard">
       <input
         matInput
-        placeholder="Search"
+        placeholder="{{ 'ROOT.SEARCH' | translate }}"
         [(ngModel)]="searchText"
         (input)="noteFilterChanged(notes, searchText)"
       />
     </mat-form-field>
+    <mat-form-field class="!hidden lg:!block" appearance="standard">
+      <mat-label>{{ "ROOT.LANGUAGE" | translate }}</mat-label>
+      <mat-select #selLang (valueChange)="translateLanguageTo(selLang.value)">
+        <mat-option
+          *ngFor="let language of translate.getLangs()"
+          [value]="language"
+        >
+          {{ language }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-button-toggle class="lg:!hidden" appearance="legacy">
+      <mat-select
+        #selLang
+        (valueChange)="translateLanguageTo($event)"
+        [value]="'vi'"
+      >
+        <mat-option
+          *ngFor="let language of translate.getLangs()"
+          [value]="language"
+        >
+          {{ language }}
+        </mat-option>
+      </mat-select>
+    </mat-button-toggle>
   </mat-toolbar>
   <div
     class="note-list pb-16 px-4 lg:!px-0 min-h-screen"
@@ -33,7 +58,7 @@
       class="!hidden lg:!block w-60 add-note-button bg-gradient-to-r from-purple-500 to-pink-500"
       routerLink="create-note"
     >
-      <span class="text-xl text-purple-600">ADD</span>
+      <span class="text-xl text-purple-600">{{ "ROOT.ADD" | translate }}</span>
     </button>
     <button
       mat-raised-button
