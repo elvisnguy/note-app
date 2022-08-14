@@ -16,6 +16,9 @@ import { updateNote } from '../../../store/note/note.action';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import * as _ from 'lodash';
+import { BackgroundColorModel } from '../../../model/note/background-color.model';
+import { ColorNameEnum } from '../../../model/note/color-name.enum';
+import { ColorValueEnum } from '../../../model/note/color-value.enum';
 
 @Component({
   selector: 'app-note-detail',
@@ -27,6 +30,29 @@ export class NoteDetailComponent implements OnInit {
   noteFormGroup: FormGroup;
   note: NoteModel;
   labels: Array<string> = [];
+  backgroundNote: BackgroundColorModel;
+  backgroundColors: Array<BackgroundColorModel> = [
+    {
+      name: ColorNameEnum.DEFAULT,
+      color: ColorValueEnum.DEFAULT,
+    },
+    {
+      name: ColorNameEnum.RED,
+      color: ColorValueEnum.RED,
+    },
+    {
+      name: ColorNameEnum.ORANGE,
+      color: ColorValueEnum.ORANGE,
+    },
+    {
+      name: ColorNameEnum.YELLOW,
+      color: ColorValueEnum.YELLOW,
+    },
+    {
+      name: ColorNameEnum.PURPLE,
+      color: ColorValueEnum.PURPLE,
+    },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,7 +98,13 @@ export class NoteDetailComponent implements OnInit {
 
   updateNote(form: any): any {
     this.store.dispatch(
-      updateNote({ note: { ...form.value, labels: this.labels } })
+      updateNote({
+        note: {
+          ...form.value,
+          labels: this.labels,
+          backgroundColor: this.backgroundNote,
+        },
+      })
     );
   }
 
@@ -107,5 +139,21 @@ export class NoteDetailComponent implements OnInit {
     if (index >= 0) {
       this.labels.splice(index, 1);
     }
+  }
+
+  applyNoteBackgroundColor(): any {
+    if (!this.note?.backgroundColor?.color) {
+      return {};
+    }
+    const styles = { backgroundColor: `${this.note.backgroundColor.color}` };
+    return styles;
+  }
+
+  setBackgroundColor(colorValue: any): void {
+    this.backgroundNote = colorValue;
+    //@ts-ignore
+    document.getElementById(
+      'setNoteBackground'
+    ).style.backgroundColor = `${this.backgroundNote.color}`;
   }
 }
