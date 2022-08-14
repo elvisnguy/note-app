@@ -1,6 +1,6 @@
-<mat-card class="mx-auto max-w-lg my-3 backdrop-blur-lg note-card">
+<mat-card class="mx-auto max-w-lg my-3 backdrop-blur-lg" [ngStyle]="applyNoteBackgroundColor()">
   <mat-card-title>{{ note.title }}</mat-card-title>
-  <mat-card-content class="h-20 p-2 text-opacity-50 text-gray-300 overflow-auto">{{ note.body }} </mat-card-content>
+  <div class="h-20 p-2 text-opacity-50 text-gray-300 overflow-auto content">{{ note.body }} </div>
 
   <mat-chip-list>
     <mat-chip *ngFor="let label of note?.labels">{{ label }}</mat-chip>

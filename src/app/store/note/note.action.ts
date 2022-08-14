@@ -56,7 +56,7 @@ export const deleteNoteFail = createAction(
 
 export const updateNote = createAction(
   '[NOTE] Update Note',
-  props<{ note: any }>()
+  props<{ note: NoteModel }>()
 );
 
 export const updateNoteSuccess = createAction(

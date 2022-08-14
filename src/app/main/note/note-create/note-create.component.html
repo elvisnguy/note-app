@@ -1,5 +1,8 @@
 <div class="flex h-screen justify-center items-center px-4 lg:!px-0">
-  <div class="backdrop-blur-lg bg-violet-900 bg-opacity-80 w-96 rounded-md shadow-2xl">
+  <div
+    class="backdrop-blur-lg bg-violet-900 bg-opacity-80 w-96 rounded-md shadow-2xl"
+    id="setNoteBackground"
+  >
     <form
       class="flex flex-col w-full p-5"
       #noteForm="ngForm"
@@ -7,17 +10,17 @@
       (ngSubmit)="onSubmit(noteForm)"
     >
       <mat-form-field appearance="fill">
-        <mat-label>{{'ROOT.TITLE' | translate}}</mat-label>
+        <mat-label>{{ "ROOT.TITLE" | translate }}</mat-label>
         <input matInput formControlName="title" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>{{'ROOT.BODY' | translate}}</mat-label>
+        <mat-label>{{ "ROOT.BODY" | translate }}</mat-label>
         <textarea matInput formControlName="body" class="h-20"></textarea>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>{{'ROOT.LABEL' | translate}}</mat-label>
+        <mat-label>{{ "ROOT.LABEL" | translate }}</mat-label>
         <mat-chip-list class="label-chip-list" #chipList>
           <mat-chip
             *ngFor="let label of labels"
@@ -31,7 +34,7 @@
           </mat-chip>
           <input
             matInput
-            placeholder="{{'ROOT.PLEASE_ENTER_LABELS' | translate}}"
+            placeholder="{{ 'ROOT.PLEASE_ENTER_LABELS' | translate }}"
             data-cy="labels"
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -43,6 +46,13 @@
         </mat-chip-list>
       </mat-form-field>
 
+      <mat-form-field appearance="fill">
+        <mat-label>Panel color</mat-label>
+        <mat-select>
+          <mat-option [value]="background" (click)="setBackgroundColor(background)" [ngStyle]="{'background-color': background.color}" *ngFor="let background of backgroundColors">{{background.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <div class="flex justify-end">
         <button
           mat-raised-button
@@ -50,7 +60,7 @@
           type="submit"
           [disabled]="!noteForm.valid"
         >
-          {{'ROOT.ADD' | translate}}
+          {{ "ROOT.ADD" | translate }}
         </button>
       </div>
     </form>

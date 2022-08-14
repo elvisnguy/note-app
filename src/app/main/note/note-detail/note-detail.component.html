@@ -1,5 +1,5 @@
 <div class="h-screen flex justify-center items-center px-4 lg:!px-0">
-  <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl">
+  <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl" id="setNoteBackground" [ngStyle]="applyNoteBackgroundColor()">
     <form
       class="flex flex-col w-full my-3 p-5"
       #noteForm="ngForm"
@@ -41,6 +41,13 @@
             #labelInput
           />
         </mat-chip-list>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Panel color</mat-label>
+        <mat-select>
+          <mat-option [value]="background" (click)="setBackgroundColor(background)" [ngStyle]="{'background-color': background.color}" *ngFor="let background of backgroundColors">{{background.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <div class="flex justify-end">
