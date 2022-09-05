@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { NoteEffect } from './store/note/note.effect';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ProgressBarModule } from './component/progress-bar/progress-bar.module';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function (state, action) {
@@ -35,6 +36,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     LayoutModule,
     NoteModule,
+    ProgressBarModule,
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({

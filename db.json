@@ -4,14 +4,6 @@
       "title": "test",
       "body": "asdasdasd",
       "id": 1,
-      "backgroundColor": {
-        "name": "RED",
-        "color": "#d64161"
-      },
-      "backgroundImage": {
-        "name": "RECIPE",
-        "image": "url('https://www.gstatic.com/keep/backgrounds/recipe_dark_0609.svg')"
-      },
       "labels": [
         "ddddv"
       ]
