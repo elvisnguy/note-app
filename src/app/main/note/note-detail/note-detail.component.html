@@ -1,5 +1,6 @@
-<div class="h-screen flex justify-center items-center px-4 lg:!px-0">
-  <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl" id="setNoteBackground" [ngStyle]="applyNoteBackgroundColor()">
+<div class="min-h-screen flex justify-center items-center px-4 lg:!px-0">
+  <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl"
+       id="setNoteBackgroundColor" [ngStyle]="applyNoteBackgroundColor()">
     <form
       class="flex flex-col w-full my-3 p-5"
       #noteForm="ngForm"
@@ -8,12 +9,12 @@
     >
       <mat-form-field appearance="fill">
         <mat-label>{{'ROOT.TITLE' | translate}}</mat-label>
-        <input matInput formControlName="title" />
+        <input matInput formControlName="title"/>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" id="setNoteBackgroundImage" [ngStyle]="applyNoteBackgroundImage()">
         <mat-label>{{'ROOT.BODY' | translate}}</mat-label>
-        <textarea matInput formControlName="body" class="h-20" ></textarea>
+        <textarea matInput formControlName="body" class="h-20"></textarea>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -44,14 +45,34 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Panel color</mat-label>
-        <mat-select>
-          <mat-option [value]="background" (click)="setBackgroundColor(background)" [ngStyle]="{'background-color': background.color}" *ngFor="let background of backgroundColors">{{background.name}}</mat-option>
+        <mat-label>{{'ROOT.BACKGROUND_COLOR' |translate}}</mat-label>
+        <mat-select formControlName="backgroundColor" [compareWith]="setBackgroundColorName">
+          <mat-option
+            *ngFor="let background of backgroundColors"
+            [value]="background"
+            (click)="setBackgroundColor(background)"
+            [ngStyle]="{'background-color': background.color}">
+            {{background.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{'ROOT.BACKGROUND_IMAGE' |translate}}</mat-label>
+        <mat-select formControlName="backgroundImage" [compareWith]="setBackgroundImageName">
+          <mat-option
+            [value]="background"
+            (click)="setBackgroundImage(background)"
+            [ngStyle]="{ 'background-color': background.image }"
+            *ngFor="let background of backgroundImages"
+          >{{ background.name }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
       <div class="flex justify-end">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!noteForm.valid">{{'ROOT.UPDATE' | translate}}</button>
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="!noteForm.valid">{{'ROOT.UPDATE' | translate}}</button>
       </div>
     </form>
   </div>

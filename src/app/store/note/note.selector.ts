@@ -1,7 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromReducer from './note.reducer';
-import { cloneDeep } from 'lodash';
-import { NoteModel } from '../../model/note/note.model';
 import { noteAdapter } from './note.reducer';
 
 export const selectNotesState =
@@ -15,7 +13,7 @@ const {
 } = noteAdapter.getSelectors(selectNotesState);
 
 export const selectNotes = createSelector(selectAllNotes, (notes) => {
-  return notes.slice(0, 10);
+  return notes;
 });
 
 export const selectNoteDetailsById = (noteId: number) =>
