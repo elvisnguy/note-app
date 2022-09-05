@@ -19,6 +19,9 @@ import * as _ from 'lodash';
 import { BackgroundColorModel } from '../../../model/note/background-color.model';
 import { ColorNameEnum } from '../../../model/note/color-name.enum';
 import { ColorValueEnum } from '../../../model/note/color-value.enum';
+import { BackgroundImageModel } from '../../../model/note/background-image.model';
+import { ImageNameEnum } from '../../../model/note/image-name.enum';
+import { ImageValueEnum } from '../../../model/note/image-value.enum';
 
 @Component({
   selector: 'app-note-detail',
@@ -30,7 +33,8 @@ export class NoteDetailComponent implements OnInit {
   noteFormGroup: FormGroup;
   note: NoteModel;
   labels: Array<string> = [];
-  backgroundNote: BackgroundColorModel;
+  backgroundNoteColor: BackgroundColorModel;
+  backgroundNoteImage: BackgroundImageModel;
   backgroundColors: Array<BackgroundColorModel> = [
     {
       name: ColorNameEnum.DEFAULT,
@@ -51,6 +55,28 @@ export class NoteDetailComponent implements OnInit {
     {
       name: ColorNameEnum.PURPLE,
       color: ColorValueEnum.PURPLE,
+    },
+  ];
+  backgroundImages: Array<BackgroundImageModel> = [
+    {
+      name: ImageNameEnum.DEFAULT,
+      image: ImageValueEnum.DEFAULT,
+    },
+    {
+      name: ImageNameEnum.NOTES,
+      image: ImageValueEnum.NOTES,
+    },
+    {
+      name: ImageNameEnum.GROCERY,
+      image: ImageValueEnum.GROCERY,
+    },
+    {
+      name: ImageNameEnum.FOOD,
+      image: ImageValueEnum.FOOD,
+    },
+    {
+      name: ImageNameEnum.RECIPE,
+      image: ImageValueEnum.RECIPE,
     },
   ];
 
@@ -88,12 +114,27 @@ export class NoteDetailComponent implements OnInit {
       title: new FormControl('', Validators.required),
       body: new FormControl('', Validators.required),
       id: new FormControl(''),
+      backgroundColor: new FormControl(''),
+      backgroundImage: new FormControl(''),
     });
   }
 
   setFormValue(): void {
     this.noteFormGroup.patchValue(this.note);
     this.labels = _.cloneDeep(this.note?.labels);
+  }
+  setBackgroundColorName(
+    c1: BackgroundColorModel,
+    c2: BackgroundColorModel
+  ): boolean {
+    return c1 && c2 ? c1.name === c2.name : c1 === c2;
+  }
+
+  setBackgroundImageName(
+    c1: BackgroundImageModel,
+    c2: BackgroundImageModel
+  ): boolean {
+    return c1 && c2 ? c1.name === c2.name : c1 === c2;
   }
 
   updateNote(form: any): any {
@@ -102,7 +143,8 @@ export class NoteDetailComponent implements OnInit {
         note: {
           ...form.value,
           labels: this.labels,
-          backgroundColor: this.backgroundNote,
+          backgroundColor: this.backgroundNoteColor,
+          backgroundImage: this.backgroundNoteImage,
         },
       })
     );
@@ -149,11 +191,33 @@ export class NoteDetailComponent implements OnInit {
     return styles;
   }
 
+  applyNoteBackgroundImage(): any {
+    if (!this.note?.backgroundImage?.image) {
+      return {};
+    }
+    const styles = { backgroundImage: `${this.note.backgroundImage.image}` };
+    return styles;
+  }
+
   setBackgroundColor(colorValue: any): void {
-    this.backgroundNote = colorValue;
+    this.backgroundNoteColor = colorValue;
     //@ts-ignore
     document.getElementById(
-      'setNoteBackground'
-    ).style.backgroundColor = `${this.backgroundNote.color}`;
+      'setNoteBackgroundColor'
+    ).style.backgroundColor = `${this.backgroundNoteColor.color}`;
+  }
+
+  setBackgroundImage(imageValue: any): void {
+    this.backgroundNoteImage = imageValue;
+    // @ts-ignore
+    document.getElementById(
+      'setNoteBackgroundImage'
+    ).style.backgroundImage = `${this.backgroundNoteImage.image}`;
+    // @ts-ignore
+    document.getElementById('setNoteBackgroundImage').style.backgroundPosition =
+      'center';
+    // @ts-ignore
+    document.getElementById('setNoteBackgroundImage').style.backgroundSize =
+      'cover';
   }
 }

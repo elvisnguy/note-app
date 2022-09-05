@@ -1,8 +1,9 @@
 import { BackgroundColorModel } from './background-color.model';
+import { BackgroundImageModel } from './background-image.model';
 
 export interface NoteModel {
   backgroundColor: BackgroundColorModel;
-  backgroundImage: any;
+  backgroundImage: BackgroundImageModel;
   labels: Array<string>;
   title: string;
   body: string;

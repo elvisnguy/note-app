@@ -11,6 +11,8 @@
     "ADD":"Thêm",
     "DELETE":"Xóa",
     "UPDATE":"Cập nhật",
-    "DETAIL":"Chi tiết"
+    "DETAIL":"Chi tiết",
+    "BACKGROUND_COLOR": "Màu nền",
+    "BACKGROUND_IMAGE": "Hình nền"
   }
 }

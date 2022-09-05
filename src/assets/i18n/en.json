@@ -11,6 +11,8 @@
     "ADD": "Add",
     "DELETE": "Delete",
     "UPDATE": "Update",
-    "DETAIL": "Detail"
+    "DETAIL": "Detail",
+    "BACKGROUND_COLOR": "Background color",
+    "BACKGROUND_IMAGE": "Background image"
   }
 }

@@ -1,10 +1,17 @@
-<mat-card class="mx-auto max-w-lg my-3 backdrop-blur-lg" [ngStyle]="applyNoteBackgroundColor()">
+<mat-card
+  class="mx-auto max-w-lg my-3 backdrop-blur-lg"
+  [ngStyle]="applyNoteBackgroundColor()"
+>
   <mat-card-title>{{ note.title }}</mat-card-title>
-  <div class="h-20 p-2 text-opacity-50 text-gray-300 overflow-auto content">{{ note.body }} </div>
+  <mat-card-content class="h-40 p-2 text-opacity-50 text-gray-300 overflow-auto rounded" [ngStyle]="applyNoteBackgroundImage()">
+    {{ note.body }}
+  </mat-card-content>
 
-  <mat-chip-list>
-    <mat-chip *ngFor="let label of note?.labels">{{ label }}</mat-chip>
-  </mat-chip-list>
+  <div class="mt-3">
+    <mat-chip-list>
+      <mat-chip *ngFor="let label of note?.labels">{{ label }}</mat-chip>
+    </mat-chip-list>
+  </div>
   <mat-card-actions align="end">
     <a
       mat-raised-button
@@ -12,7 +19,9 @@
       (click)="viewNoteDetail()"
       [routerLink]="['notes', note.id]"
     >
-      <span class="text-sm text-emerald-500">{{'ROOT.DETAIL' | translate}}</span>
+      <span class="text-sm text-emerald-500">{{
+        "ROOT.DETAIL" | translate
+      }}</span>
     </a>
 
     <button
@@ -20,7 +29,7 @@
       class="note-delete-button bg-red-300"
       (click)="deleteNote()"
     >
-      <span class="text-sm text-red-500">{{'ROOT.DELETE' | translate}}</span>
+      <span class="text-sm text-red-500">{{ "ROOT.DELETE" | translate }}</span>
     </button>
   </mat-card-actions>
 </mat-card>

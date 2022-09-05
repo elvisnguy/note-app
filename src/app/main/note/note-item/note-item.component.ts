@@ -30,4 +30,12 @@ export class NoteItemComponent implements OnInit {
     const styles = { backgroundColor: `${this.note.backgroundColor.color}` };
     return styles;
   }
+
+  applyNoteBackgroundImage(): any {
+    if (!this.note?.backgroundImage?.image) {
+      return {};
+    }
+    const styles = { backgroundImage: `${this.note.backgroundImage.image}` };
+    return styles;
+  }
 }

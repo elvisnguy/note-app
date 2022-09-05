@@ -15,6 +15,9 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { BackgroundColorModel } from '../../../model/note/background-color.model';
 import { ColorNameEnum } from '../../../model/note/color-name.enum';
 import { ColorValueEnum } from '../../../model/note/color-value.enum';
+import { BackgroundImageModel } from '../../../model/note/background-image.model';
+import { ImageValueEnum } from 'src/app/model/note/image-value.enum';
+import { ImageNameEnum } from 'src/app/model/note/image-name.enum';
 
 @Component({
   selector: 'app-note-create',
@@ -25,8 +28,7 @@ export class NoteCreateComponent implements OnInit {
   noteFormGroup: FormGroup;
   note: NoteModel;
   labels: Array<string> = [];
-  backgroundNote: BackgroundColorModel;
-
+  backgroundNoteColor: BackgroundColorModel;
   backgroundColors: Array<BackgroundColorModel> = [
     {
       name: ColorNameEnum.DEFAULT,
@@ -47,6 +49,29 @@ export class NoteCreateComponent implements OnInit {
     {
       name: ColorNameEnum.PURPLE,
       color: ColorValueEnum.PURPLE,
+    },
+  ];
+  backgroundNoteImage: BackgroundImageModel;
+  backgroundImages: Array<BackgroundImageModel> = [
+    {
+      name: ImageNameEnum.DEFAULT,
+      image: ImageValueEnum.DEFAULT,
+    },
+    {
+      name: ImageNameEnum.NOTES,
+      image: ImageValueEnum.NOTES,
+    },
+    {
+      name: ImageNameEnum.GROCERY,
+      image: ImageValueEnum.GROCERY,
+    },
+    {
+      name: ImageNameEnum.FOOD,
+      image: ImageValueEnum.FOOD,
+    },
+    {
+      name: ImageNameEnum.RECIPE,
+      image: ImageValueEnum.RECIPE,
     },
   ];
 
@@ -81,7 +106,8 @@ export class NoteCreateComponent implements OnInit {
         note: {
           ...form.value,
           labels: this.labels,
-          backgroundColor: this.backgroundNote,
+          backgroundColor: this.backgroundNoteColor,
+          backgroundImage: this.backgroundNoteImage,
         },
       })
     );
@@ -122,10 +148,23 @@ export class NoteCreateComponent implements OnInit {
   }
 
   setBackgroundColor(colorValue: any): void {
-    this.backgroundNote = colorValue;
+    this.backgroundNoteColor = colorValue;
     // @ts-ignore
     document.getElementById(
-      'setNoteBackground'
-    ).style.backgroundColor = `${this.backgroundNote.color}`;
+      'setNoteBackgroundColor'
+    ).style.backgroundColor = `${this.backgroundNoteColor.color}`;
+  }
+  setBackgroundImage(imageValue: any): void {
+    this.backgroundNoteImage = imageValue;
+    // @ts-ignore
+    document.getElementById(
+      'setNoteBackgroundImage'
+    ).style.backgroundImage = `${this.backgroundNoteImage.image}`;
+    // @ts-ignore
+    document.getElementById('setNoteBackgroundImage').style.backgroundPosition =
+      'center';
+    // @ts-ignore
+    document.getElementById('setNoteBackgroundImage').style.backgroundSize =
+      'cover';
   }
 }
