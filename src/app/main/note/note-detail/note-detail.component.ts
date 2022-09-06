@@ -120,6 +120,7 @@ export class NoteDetailComponent implements OnInit {
   }
 
   setFormValue(): void {
+    console.log(this.noteFormGroup);
     this.noteFormGroup.patchValue(this.note);
     this.labels = _.cloneDeep(this.note?.labels);
   }
@@ -143,8 +144,6 @@ export class NoteDetailComponent implements OnInit {
         note: {
           ...form.value,
           labels: this.labels,
-          backgroundColor: this.backgroundNoteColor,
-          backgroundImage: this.backgroundNoteImage,
         },
       })
     );
