@@ -5,12 +5,12 @@
       "body": "asdasdasd",
       "id": 1,
       "backgroundColor": {
-        "name": "RED",
-        "color": "#d64161"
+        "name": "PURPLE",
+        "color": "#6b5b95"
       },
       "backgroundImage": {
-        "name": "RECIPE",
-        "image": "url('https://www.gstatic.com/keep/backgrounds/recipe_dark_0609.svg')"
+        "name": "FOOD",
+        "image": "url('https://www.gstatic.com/keep/backgrounds/food_dark_0609.svg')"
       },
       "labels": [
         "ddddv"
