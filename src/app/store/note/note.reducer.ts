@@ -16,7 +16,6 @@ export interface NoteState extends EntityState<NoteModel> {
 
 export const noteAdapter: EntityAdapter<NoteModel> =
   createEntityAdapter<NoteModel>({
-    sortComparer: (a, b) => Number(b.id) - Number(a.id),
     selectId: (note: NoteModel) => note.id,
   });
 
@@ -55,7 +54,10 @@ export const notesReducer = createReducer(
     return { ...state };
   }),
   on(NoteAction.createNoteSuccess, (state, { note }) => {
-    return noteAdapter.addOne(note, { ...state, pending: false });
+    return noteAdapter.addOne(
+      { ...note, isNew: true },
+      { ...state, pending: false }
+    );
   }),
   on(NoteAction.createNoteFail, (state) => {
     return { ...state };

@@ -3,10 +3,10 @@ import { NoteService } from '../../../service/note/note.service';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducer';
 import { selectNotes } from '../../../store/note/note.selector';
-import { getNote } from '../../../store/note/note.action';
+import { getNote, updateNote } from '../../../store/note/note.action';
 import { Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -37,6 +37,10 @@ export class NoteListComponent implements OnInit {
     this.notes$.pipe().subscribe((notes) => {
       this.notes = notes;
       this.displayNotes = notes;
+
+      this.displayNotes.sort(
+        (a, b) => +a.isNew - +b.isNew || a.order - b.order
+      );
     });
   }
 
@@ -49,9 +53,30 @@ export class NoteListComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.displayNotes, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<any[]>) {
+    const previousNote = this.notes[event.previousIndex];
+    const currentNote = this.notes[event.currentIndex];
+    const [note1, note2] = this.swapNoteOrder(previousNote, currentNote);
+    this.store.dispatch(updateNote({ note: note1 }));
+    this.store.dispatch(updateNote({ note: note2 }));
   }
+
+  swapNoteOrder(note1: NoteModel, note2: NoteModel): Array<NoteModel> {
+    const note1Order = note1.order;
+    const note2Order = note2.order;
+
+    note1 = {
+      ...note1,
+      order: note2Order,
+    };
+    note2 = {
+      ...note2,
+      order: note1Order,
+    };
+
+    return [note1, note2];
+  }
+
   translateLanguageTo(lang: string) {
     this.translate.use(lang);
   }

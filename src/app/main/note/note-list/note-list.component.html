@@ -38,9 +38,12 @@
   <div
     class="note-list pb-16 px-4 lg:!px-0 min-h-screen"
     cdkDropList
+    #noteList="cdkDropList"
     (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="displayNotes"
   >
     <app-note-item
+      [cdkDragData]="note"
       *ngFor="let note of displayNotes"
       [note]="note"
       class="w-full"
