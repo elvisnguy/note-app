@@ -79,7 +79,7 @@ export class NoteEffect {
   updateNote$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NoteAction.updateNote),
-      exhaustMap((action) =>
+      concatMap((action) =>
         this.noteService.updateNote(action.note).pipe(
           map((res) => {
             this.router.navigate(['/']);

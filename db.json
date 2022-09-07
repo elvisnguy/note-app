@@ -1,20 +1,41 @@
 {
   "notes": [
     {
-      "title": "test",
-      "body": "asdasdasd",
-      "id": 1,
+      "title": "Thành",
+      "body": "tối nay chở mẹ đi chơi ",
+      "labels": [
+        "haha",
+        "hihi",
+        "huhu"
+      ],
       "backgroundColor": {
-        "name": "PURPLE",
-        "color": "#6b5b95"
+        "name": "RED",
+        "color": "#d64161"
+      },
+      "backgroundImage": {
+        "name": "NOTES",
+        "image": "url('https://www.gstatic.com/keep/backgrounds/notes_dark_0714.svg')"
+      },
+      "id": 1,
+      "order": 2
+    },
+    {
+      "title": "Minh",
+      "body": "mồm thối, nói nhiều ",
+      "labels": [
+        "dd",
+        "aaaa"
+      ],
+      "backgroundColor": {
+        "name": "ORANGE",
+        "color": "#ff7b25"
       },
       "backgroundImage": {
         "name": "FOOD",
         "image": "url('https://www.gstatic.com/keep/backgrounds/food_dark_0609.svg')"
       },
-      "labels": [
-        "ddddv"
-      ]
+      "id": 2,
+      "order": 1
     }
   ]
 }

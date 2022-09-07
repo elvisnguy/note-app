@@ -8,4 +8,6 @@ export interface NoteModel {
   title: string;
   body: string;
   id: number;
+  order: number;
+  isNew: boolean;
 }
