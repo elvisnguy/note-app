@@ -23,8 +23,7 @@ export class NoteListComponent implements OnInit {
 
   constructor(
     private noteService: NoteService,
-    private store: Store<AppState>,
-    public translate: TranslateService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -44,11 +43,10 @@ export class NoteListComponent implements OnInit {
     });
   }
 
-  noteFilterChanged(notes: Array<NoteModel>, searchText: string): any {
-    if (!notes) return [];
-    if (!searchText) return notes;
-
-    this.displayNotes = notes.filter((note: NoteModel) => {
+  noteFilterChanged(searchText: string): any {
+    if (!this.notes) return [];
+    if (!searchText) return this.notes;
+    this.displayNotes = this.notes.filter((note: NoteModel) => {
       return note.title.toLowerCase().includes(searchText.toLowerCase());
     });
   }
@@ -75,9 +73,5 @@ export class NoteListComponent implements OnInit {
     };
 
     return [note1, note2];
-  }
-
-  translateLanguageTo(lang: string) {
-    this.translate.use(lang);
   }
 }
