@@ -4,10 +4,10 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducer';
 import { selectNotes } from '../../../store/note/note.selector';
 import { getNote, updateNote } from '../../../store/note/note.action';
-import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TranslateService } from '@ngx-translate/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-note-list',
@@ -18,8 +18,9 @@ export class NoteListComponent implements OnInit {
   notes$: Observable<Array<NoteModel>>;
   notes: Array<NoteModel>;
   note: NoteModel;
-  searchText: string;
+  searchText: any;
   displayNotes: Array<NoteModel> = [];
+  searchControl: FormControl;
 
   constructor(
     private noteService: NoteService,
@@ -28,6 +29,12 @@ export class NoteListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNote();
+    this.searchControl = new FormControl('');
+    this.searchControl.valueChanges
+      .pipe(debounceTime(3000), distinctUntilChanged())
+      .subscribe(() => {
+        this.noteFilterChanged(this.searchText);
+      });
   }
 
   getNote(): void {
@@ -36,7 +43,6 @@ export class NoteListComponent implements OnInit {
     this.notes$.pipe().subscribe((notes) => {
       this.notes = notes;
       this.displayNotes = notes;
-
       this.displayNotes.sort(
         (a, b) => +a.isNew - +b.isNew || a.order - b.order
       );

@@ -22,20 +22,4 @@ export class NoteItemComponent implements OnInit {
   deleteNote(): void {
     this.store.dispatch(deleteNote({ noteId: this.note.id }));
   }
-
-  applyNoteBackgroundColor(): any {
-    if (!this.note?.backgroundColor?.color) {
-      return {};
-    }
-    const styles = { backgroundColor: `${this.note.backgroundColor.color}` };
-    return styles;
-  }
-
-  applyNoteBackgroundImage(): any {
-    if (!this.note?.backgroundImage?.image) {
-      return {};
-    }
-    const styles = { backgroundImage: `${this.note.backgroundImage.image}` };
-    return styles;
-  }
 }

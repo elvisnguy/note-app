@@ -6,6 +6,7 @@
         placeholder="{{ 'ROOT.SEARCH' | translate }}"
         [(ngModel)]="searchText"
         (input)="noteFilterChanged(searchText)"
+        [formControl]="searchControl"
       />
     </mat-form-field>
   </div>
