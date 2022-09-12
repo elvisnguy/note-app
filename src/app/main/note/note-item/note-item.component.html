@@ -1,12 +1,12 @@
 <mat-card
   class="mx-auto max-w-lg my-3 backdrop-blur-lg"
-  [ngStyle]="{ background: this.note.backgroundColor.color }"
+  [ngStyle]="{ background: this.note?.backgroundColor?.color }"
 >
   <mat-card-title>{{ note.title }}</mat-card-title>
   <mat-card-content
     class="h-40 p-2 text-opacity-50 text-gray-300 overflow-auto rounded"
     [ngStyle]="{
-      background: this.note.backgroundImage.image,
+      background: this.note?.backgroundImage?.image,
       'background-position': 'center',
       'background-size': 'cover'
     }"

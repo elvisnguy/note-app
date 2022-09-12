@@ -3,7 +3,12 @@ import { NoteService } from '../../../service/note/note.service';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducer';
 import { selectNotes } from '../../../store/note/note.selector';
-import { getNote, updateNote } from '../../../store/note/note.action';
+import {
+  getNote,
+  getNoteDetail,
+  updateNote,
+  deleteNote,
+} from '../../../store/note/note.action';
 import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -43,7 +48,7 @@ export class NoteListComponent implements OnInit {
     this.notes$.pipe().subscribe((notes) => {
       this.notes = notes;
       this.displayNotes = notes;
-      this.displayNotes.sort(
+      this.displayNotes = this.displayNotes.sort(
         (a, b) => +a.isNew - +b.isNew || a.order - b.order
       );
     });
@@ -51,7 +56,7 @@ export class NoteListComponent implements OnInit {
 
   noteFilterChanged(searchText: string): any {
     if (!this.notes) return [];
-    if (!searchText) return this.notes;
+    if (!searchText) this.displayNotes = this.notes;
     this.displayNotes = this.notes.filter((note: NoteModel) => {
       return note.title.toLowerCase().includes(searchText.toLowerCase());
     });
@@ -79,5 +84,13 @@ export class NoteListComponent implements OnInit {
     };
 
     return [note1, note2];
+  }
+
+  viewNoteDetail(noteId: number): void {
+    this.store.dispatch(getNoteDetail({ noteId }));
+  }
+
+  deleteNote(noteId: number): void {
+    this.store.dispatch(deleteNote({ noteId }));
   }
 }

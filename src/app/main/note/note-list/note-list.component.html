@@ -21,6 +21,8 @@
       [cdkDragData]="note"
       *ngFor="let note of displayNotes"
       [note]="note"
+      (removeNote)="deleteNote($event)"
+      (viewDetailNote)="viewNoteDetail($event)"
       class="w-full"
       cdkDrag
       cdkDragHandle
