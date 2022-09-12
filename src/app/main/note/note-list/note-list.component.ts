@@ -49,7 +49,7 @@ export class NoteListComponent implements OnInit {
       this.notes = notes;
       this.displayNotes = notes;
       this.displayNotes = this.displayNotes.sort(
-        (a, b) => +a.isNew - +b.isNew || a.order - b.order
+        (a, b) => +b.isNew - +a.isNew || a.order - b.order
       );
     });
   }
