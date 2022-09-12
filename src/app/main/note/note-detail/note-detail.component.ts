@@ -105,11 +105,6 @@ export class NoteDetailComponent implements OnInit {
   }
 
   initForm(): void {
-    // this.noteFormGroup = this.formBuilder.group({
-    //   title: ['', Validators.required],
-    //   body: ['', Validators.required],
-    //   id: [''],
-
     this.noteFormGroup = new FormGroup({
       title: new FormControl('', Validators.required),
       body: new FormControl('', Validators.required),
@@ -120,10 +115,10 @@ export class NoteDetailComponent implements OnInit {
   }
 
   setFormValue(): void {
-    console.log(this.noteFormGroup);
     this.noteFormGroup.patchValue(this.note);
     this.labels = _.cloneDeep(this.note?.labels);
   }
+
   setBackgroundColorName(
     c1: BackgroundColorModel,
     c2: BackgroundColorModel
@@ -182,41 +177,20 @@ export class NoteDetailComponent implements OnInit {
     }
   }
 
-  applyNoteBackgroundColor(): any {
-    if (!this.note?.backgroundColor?.color) {
-      return {};
-    }
-    const styles = { backgroundColor: `${this.note.backgroundColor.color}` };
-    return styles;
-  }
-
-  applyNoteBackgroundImage(): any {
-    if (!this.note?.backgroundImage?.image) {
-      return {};
-    }
-    const styles = { backgroundImage: `${this.note.backgroundImage.image}` };
-    return styles;
-  }
-
   setBackgroundColor(colorValue: any): void {
     this.backgroundNoteColor = colorValue;
-    //@ts-ignore
-    document.getElementById(
-      'setNoteBackgroundColor'
+    (
+      document.getElementById('setNoteBackgroundColor') as HTMLElement
     ).style.backgroundColor = `${this.backgroundNoteColor.color}`;
   }
 
   setBackgroundImage(imageValue: any): void {
-    this.backgroundNoteImage = imageValue;
-    // @ts-ignore
-    document.getElementById(
+    const element = document.getElementById(
       'setNoteBackgroundImage'
-    ).style.backgroundImage = `${this.backgroundNoteImage.image}`;
-    // @ts-ignore
-    document.getElementById('setNoteBackgroundImage').style.backgroundPosition =
-      'center';
-    // @ts-ignore
-    document.getElementById('setNoteBackgroundImage').style.backgroundSize =
-      'cover';
+    ) as HTMLElement;
+    this.backgroundNoteImage = imageValue;
+    element.style.backgroundImage = `${this.backgroundNoteImage.image}`;
+    element.style.backgroundPosition = 'center';
+    element.style.backgroundSize = 'cover';
   }
 }

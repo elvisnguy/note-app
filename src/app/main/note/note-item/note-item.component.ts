@@ -1,8 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NoteModel } from '../../../model/note/note.model';
-import { AppState } from '../../../store/reducer';
-import { Store } from '@ngrx/store';
-import { deleteNote, getNoteDetail } from '../../../store/note/note.action';
 
 @Component({
   selector: 'app-note-item',
@@ -11,31 +8,19 @@ import { deleteNote, getNoteDetail } from '../../../store/note/note.action';
 })
 export class NoteItemComponent implements OnInit {
   @Input() note: NoteModel;
-  constructor(private store: Store<AppState>) {}
+
+  @Output() viewDetailNote = new EventEmitter<number>();
+  @Output() removeNote = new EventEmitter<number>();
+
+  constructor() {}
 
   ngOnInit(): void {}
 
   viewNoteDetail(): void {
-    this.store.dispatch(getNoteDetail({ noteId: this.note.id }));
+    this.viewDetailNote.emit(this.note.id);
   }
 
   deleteNote(): void {
-    this.store.dispatch(deleteNote({ noteId: this.note.id }));
-  }
-
-  applyNoteBackgroundColor(): any {
-    if (!this.note?.backgroundColor?.color) {
-      return {};
-    }
-    const styles = { backgroundColor: `${this.note.backgroundColor.color}` };
-    return styles;
-  }
-
-  applyNoteBackgroundImage(): any {
-    if (!this.note?.backgroundImage?.image) {
-      return {};
-    }
-    const styles = { backgroundImage: `${this.note.backgroundImage.image}` };
-    return styles;
+    this.removeNote.emit(this.note.id);
   }
 }

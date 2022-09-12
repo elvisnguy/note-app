@@ -3,11 +3,16 @@ import { NoteService } from '../../../service/note/note.service';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../store/reducer';
 import { selectNotes } from '../../../store/note/note.selector';
-import { getNote, updateNote } from '../../../store/note/note.action';
-import { Observable } from 'rxjs';
+import {
+  getNote,
+  getNoteDetail,
+  updateNote,
+  deleteNote,
+} from '../../../store/note/note.action';
+import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { NoteModel } from '../../../model/note/note.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TranslateService } from '@ngx-translate/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-note-list',
@@ -18,17 +23,23 @@ export class NoteListComponent implements OnInit {
   notes$: Observable<Array<NoteModel>>;
   notes: Array<NoteModel>;
   note: NoteModel;
-  searchText: string;
+  searchText: any;
   displayNotes: Array<NoteModel> = [];
+  searchControl: FormControl;
 
   constructor(
     private noteService: NoteService,
-    private store: Store<AppState>,
-    public translate: TranslateService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     this.getNote();
+    this.searchControl = new FormControl('');
+    this.searchControl.valueChanges
+      .pipe(debounceTime(3000), distinctUntilChanged())
+      .subscribe(() => {
+        this.noteFilterChanged(this.searchText);
+      });
   }
 
   getNote(): void {
@@ -37,18 +48,16 @@ export class NoteListComponent implements OnInit {
     this.notes$.pipe().subscribe((notes) => {
       this.notes = notes;
       this.displayNotes = notes;
-
-      this.displayNotes.sort(
-        (a, b) => +a.isNew - +b.isNew || a.order - b.order
+      this.displayNotes = this.displayNotes.sort(
+        (a, b) => +b.isNew - +a.isNew || a.order - b.order
       );
     });
   }
 
-  noteFilterChanged(notes: Array<NoteModel>, searchText: string): any {
-    if (!notes) return [];
-    if (!searchText) return notes;
-
-    this.displayNotes = notes.filter((note: NoteModel) => {
+  noteFilterChanged(searchText: string): any {
+    if (!this.notes) return [];
+    if (!searchText) this.displayNotes = this.notes;
+    this.displayNotes = this.notes.filter((note: NoteModel) => {
       return note.title.toLowerCase().includes(searchText.toLowerCase());
     });
   }
@@ -77,7 +86,11 @@ export class NoteListComponent implements OnInit {
     return [note1, note2];
   }
 
-  translateLanguageTo(lang: string) {
-    this.translate.use(lang);
+  viewNoteDetail(noteId: number): void {
+    this.store.dispatch(getNoteDetail({ noteId }));
+  }
+
+  deleteNote(noteId: number): void {
+    this.store.dispatch(deleteNote({ noteId }));
   }
 }

@@ -1,25 +1,6 @@
 {
   "notes": [
     {
-      "title": "Thành",
-      "body": "tối nay chở mẹ đi chơi ",
-      "labels": [
-        "haha",
-        "hihi",
-        "huhu"
-      ],
-      "backgroundColor": {
-        "name": "RED",
-        "color": "#d64161"
-      },
-      "backgroundImage": {
-        "name": "NOTES",
-        "image": "url('https://www.gstatic.com/keep/backgrounds/notes_dark_0714.svg')"
-      },
-      "id": 1,
-      "order": 2
-    },
-    {
       "title": "Minh",
       "body": "mồm thối, nói nhiều ",
       "labels": [
@@ -34,8 +15,24 @@
         "name": "FOOD",
         "image": "url('https://www.gstatic.com/keep/backgrounds/food_dark_0609.svg')"
       },
-      "id": 2,
-      "order": 1
+      "id": 2
+    },
+    {
+      "title": "Thanh`",
+      "body": "2313",
+      "labels": [
+        "ddd"
+      ],
+      "backgroundColor": {
+        "name": "YELLOW",
+        "color": "#feb236"
+      },
+      "backgroundImage": {
+        "name": "NOTES",
+        "image": "url('https://www.gstatic.com/keep/backgrounds/notes_dark_0714.svg')"
+      },
+      "id": 3,
+      "order": 2
     }
   ]
 }

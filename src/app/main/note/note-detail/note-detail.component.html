@@ -1,6 +1,6 @@
 <div class="min-h-screen flex justify-center items-center px-4 lg:!px-0">
   <div class="backdrop-blur-lg bg-orange-300 bg-opacity-50 w-96 mx-auto rounded-md shadow-2xl"
-       id="setNoteBackgroundColor" [ngStyle]="applyNoteBackgroundColor()">
+       id="setNoteBackgroundColor"  [ngStyle]="{ background: this.note.backgroundColor.color }">
     <form
       class="flex flex-col w-full my-3 p-5"
       #noteForm="ngForm"
@@ -12,7 +12,11 @@
         <input matInput formControlName="title"/>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" id="setNoteBackgroundImage" [ngStyle]="applyNoteBackgroundImage()">
+      <mat-form-field appearance="fill" id="setNoteBackgroundImage"   [ngStyle]="{
+      background: this.note.backgroundImage.image,
+      'background-position': 'center',
+      'background-size': 'cover'
+    }">
         <mat-label>{{'ROOT.BODY' | translate}}</mat-label>
         <textarea matInput formControlName="body" class="h-20"></textarea>
       </mat-form-field>

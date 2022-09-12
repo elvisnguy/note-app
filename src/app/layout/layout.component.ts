@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-layout',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(public translate: TranslateService) {}
 
   ngOnInit(): void {}
+
+  translateLanguageTo(lang: string) {
+    this.translate.use(lang);
+  }
 }
