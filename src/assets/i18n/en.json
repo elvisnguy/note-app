@@ -13,6 +13,8 @@
     "UPDATE": "Update",
     "DETAIL": "Detail",
     "BACKGROUND_COLOR": "Background color",
-    "BACKGROUND_IMAGE": "Background image"
+    "BACKGROUND_IMAGE": "Background image",
+    "LOGOUT": "Log out",
+    "HELLO": "Hello"
   }
 }

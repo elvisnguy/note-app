@@ -2,11 +2,8 @@
   "notes": [
     {
       "title": "Minh",
-      "body": "mồm thối, nói nhiều ",
-      "labels": [
-        "dd",
-        "aaaa"
-      ],
+      "body": "mồm thối, nói nhiềuasdfmjah jsf kasjh fkajfsddd",
+      "id": 2,
       "backgroundColor": {
         "name": "ORANGE",
         "color": "#ff7b25"
@@ -15,24 +12,10 @@
         "name": "FOOD",
         "image": "url('https://www.gstatic.com/keep/backgrounds/food_dark_0609.svg')"
       },
-      "id": 2
-    },
-    {
-      "title": "Thanh`",
-      "body": "2313",
       "labels": [
-        "ddd"
-      ],
-      "backgroundColor": {
-        "name": "YELLOW",
-        "color": "#feb236"
-      },
-      "backgroundImage": {
-        "name": "NOTES",
-        "image": "url('https://www.gstatic.com/keep/backgrounds/notes_dark_0714.svg')"
-      },
-      "id": 3,
-      "order": 2
+        "dd",
+        "aaaa"
+      ]
     }
   ]
 }

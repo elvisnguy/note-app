@@ -18,13 +18,15 @@ import { ColorValueEnum } from '../../../model/note/color-value.enum';
 import { BackgroundImageModel } from '../../../model/note/background-image.model';
 import { ImageValueEnum } from 'src/app/model/note/image-value.enum';
 import { ImageNameEnum } from 'src/app/model/note/image-name.enum';
+import { Observable } from 'rxjs';
+import { CanLeaveComponent } from '../../../guards/can-leave.component';
 
 @Component({
   selector: 'app-note-create',
   templateUrl: './note-create.component.html',
   styleUrls: ['./note-create.component.scss'],
 })
-export class NoteCreateComponent implements OnInit {
+export class NoteCreateComponent implements OnInit, CanLeaveComponent {
   noteFormGroup: FormGroup;
   note: NoteModel;
   labels: Array<string> = [];
@@ -94,6 +96,14 @@ export class NoteCreateComponent implements OnInit {
     });
   }
 
+  canLeave(): boolean | Observable<boolean> {
+    const ctrl = this.noteFormGroup;
+    if (ctrl.dirty) {
+      return confirm('Di nha ck iu');
+    }
+    return true;
+  }
+
   onSubmit(form: any) {
     this.store.dispatch(
       createNote({
@@ -105,6 +115,7 @@ export class NoteCreateComponent implements OnInit {
         },
       })
     );
+    this.noteFormGroup.reset();
   }
 
   add(event: MatChipInputEvent, input: HTMLInputElement): void {
