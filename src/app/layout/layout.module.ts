@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [LayoutComponent],
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatButtonToggleModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   exports: [LayoutComponent],
 })

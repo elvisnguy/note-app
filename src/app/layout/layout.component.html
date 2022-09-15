@@ -1,31 +1,40 @@
 <div class="page-content bg-black">
   <mat-toolbar class="sticky top-0 z-10 flex flex-row justify-between">
-     <span>{{ "ROOT.NOTE_APP" | translate }}</span>
-     <mat-form-field class="!hidden lg:!block" appearance="standard">
-       <mat-label>{{ "ROOT.LANGUAGE" | translate }}</mat-label>
-       <mat-select #selLang (valueChange)="translateLanguageTo(selLang.value)">
-         <mat-option
-           *ngFor="let language of translate.getLangs()"
-           [value]="language"
-         >
-           {{ language }}
-         </mat-option>
-       </mat-select>
-     </mat-form-field>
-     <mat-button-toggle class="lg:!hidden" appearance="legacy">
-       <mat-select
-         #selLang
-         (valueChange)="translateLanguageTo($event)"
-         [value]="'vi'"
-       >
-         <mat-option
-           *ngFor="let language of translate.getLangs()"
-           [value]="language"
-         >
-           {{ language }}
-         </mat-option>
-       </mat-select>
-     </mat-button-toggle>
+    <div class="flex flex-row justify-between">
+      <span routerLink="/" class="mr-1.5">{{ "ROOT.NOTE_APP" | translate }}</span>
+      <h4>• {{('ROOT.HELLO'| translate) + ', ' + user}}</h4>
+    </div>
+    <div>
+      Dark<mat-slide-toggle (toggleChange)="setTheme()"></mat-slide-toggle>Light
+    </div>
+    <div class="flex flex-row justify-between">
+      <mat-form-field class="!hidden lg:!block w-28" appearance="standard">
+        <mat-label>{{ "ROOT.LANGUAGE" | translate }}</mat-label>
+        <mat-select #selLang (valueChange)="translateLanguageTo(selLang.value)">
+          <mat-option
+            *ngFor="let language of translate.getLangs()"
+            [value]="language"
+          >
+            {{ language }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-button-toggle class="lg:!hidden" appearance="legacy">
+        <mat-select
+          #selLang
+          (valueChange)="translateLanguageTo($event)"
+          [value]="'vi'"
+        >
+          <mat-option
+            *ngFor="let language of translate.getLangs()"
+            [value]="language"
+          >
+            {{ language }}
+          </mat-option>
+        </mat-select>
+      </mat-button-toggle>
+      <button mat-stroked-button class="ml-5" routerLink="login" click="">{{'ROOT.LOGOUT' | translate}}</button>
+    </div>
   </mat-toolbar>
   <router-outlet></router-outlet>
   <mat-toolbar

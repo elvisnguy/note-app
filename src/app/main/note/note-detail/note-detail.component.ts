@@ -22,13 +22,17 @@ import { ColorValueEnum } from '../../../model/note/color-value.enum';
 import { BackgroundImageModel } from '../../../model/note/background-image.model';
 import { ImageNameEnum } from '../../../model/note/image-name.enum';
 import { ImageValueEnum } from '../../../model/note/image-value.enum';
+import { map, Observable } from 'rxjs';
+import { CanLeaveComponent } from '../../../guards/can-leave.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmLeaveComponent } from '../../../confirm-leave/confirm-leave.component';
 
 @Component({
   selector: 'app-note-detail',
   templateUrl: './note-detail.component.html',
   styleUrls: ['./note-detail.component.scss'],
 })
-export class NoteDetailComponent implements OnInit {
+export class NoteDetailComponent implements OnInit, CanLeaveComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
   noteFormGroup: FormGroup;
   note: NoteModel;
@@ -84,13 +88,25 @@ export class NoteDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private noteService: NoteService,
     private store: Store<AppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     this.initForm();
   }
 
   ngOnInit(): void {
     this.getNoteDetailById();
+  }
+
+  canLeave(): boolean | Observable<boolean> {
+    if (!this.noteFormGroup.dirty) {
+      return true;
+    }
+
+    return this.dialog
+      .open(ConfirmLeaveComponent)
+      .afterClosed()
+      .pipe(map((res) => !!res));
   }
 
   getNoteDetailById(): void {
@@ -142,6 +158,7 @@ export class NoteDetailComponent implements OnInit {
         },
       })
     );
+    this.noteFormGroup.reset();
   }
 
   add(event: MatChipInputEvent, input: HTMLInputElement): void {

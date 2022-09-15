@@ -13,6 +13,8 @@
     "UPDATE":"Cập nhật",
     "DETAIL":"Chi tiết",
     "BACKGROUND_COLOR": "Màu nền",
-    "BACKGROUND_IMAGE": "Hình nền"
+    "BACKGROUND_IMAGE": "Hình nền",
+    "LOGOUT": "Đăng xuất",
+    "HELLO": "Xin chào"
   }
 }
